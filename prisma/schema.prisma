@@ -11,7 +11,14 @@ datasource db {
 }
 
 model User {
-  id    String @id @default(uuid())
-  name  String
-  email String @unique()
+  id       String  @id @default(uuid())
+  name     String
+  email    String  @unique()
+  isAuthor Boolean
+}
+
+model Book {
+  id     String @id @default(uuid())
+  title  String
+  rating Float
 }
