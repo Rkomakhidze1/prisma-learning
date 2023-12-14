@@ -11,12 +11,14 @@ datasource db {
 }
 
 model User {
-  id        String  @id @default(uuid())
+  id        String   @id @default(uuid())
   name      String
-  email     String  @unique()
+  email     String   @unique()
   isAuthor  Boolean
-  books     Book[]  @relation("author")
-  favorites Book[]  @relation("favorites")
+  books     Book[]   @relation("author")
+  favorites Book[]   @relation("favorites")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Book {
@@ -28,9 +30,13 @@ model Book {
   favoritedBy   User       @relation("favorites", fields: [favoritedById], references: [id])
   favoritedById String
   categories    Category[]
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
 }
 
 model Category {
-  id    String @id @default(uuid())
-  books Book[]
+  id        String   @id @default(uuid())
+  books     Book[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
