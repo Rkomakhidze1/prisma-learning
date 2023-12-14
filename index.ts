@@ -5,14 +5,28 @@ const prisma = new PrismaClient();
 const main = async () => {
   await prisma.user.deleteMany();
 
-  await prisma.user.create({
-    data: { name: "name", email: "email", isAuthor: false },
+  const userOne = await prisma.user.create({
+    data: {
+      name: "name",
+      email: "email",
+      isAuthor: false,
+      age: 19,
+      books: { create: { rating: 5, title: "my book 1" } },
+    },
+    include: { books: true },
   });
   await prisma.user.create({
-    data: { name: "another", email: "email@email.com", isAuthor: true },
+    data: {
+      name: "another",
+      email: "email@email.com",
+      isAuthor: true,
+      age: 29,
+    },
   });
 
   await prisma.user.findFirst({ where: { id: "lasnda" } });
+
+  console.log(userOne);
 };
 
 main().catch((e) => {
