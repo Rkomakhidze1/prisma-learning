@@ -25,6 +25,7 @@ const main = async () => {
   });
 
   await prisma.user.findFirst({ where: { id: "lasnda" } });
+  await prisma.user.findFirst({ where: { age: 5 } });
 
   console.log(userOne);
 };
